@@ -1,8 +1,5 @@
 def application(environ, start_response):
-	print(environ['QUERY_STRING'])
-    status = "200 OK"
-    headers = [("Content-Type", "text/plain")]
-    start_response(status, headers)
-    #body = "\n".join(environ["QUERY_STRING"].split("&"))
-	body = environ['QUERY_STRING'].replace('&', '\n')
-    return body
+    qs = environ['QUERY_STRING']
+    ls = qs.split("&")
+    start_response('200 OK', [('Content-Type', 'text/plain')])
+    return [ "\n".join(ls) ]
